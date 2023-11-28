@@ -25,7 +25,7 @@ public class JdbcUserControllers {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PostMapping(value = {"", "/", "/add"})
+    @PostMapping("")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> insert(@RequestBody UserInfo userInfo) {
         UserDetails userDetails = User.withUsername(userInfo.username())
@@ -51,7 +51,7 @@ public class JdbcUserControllers {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @PatchMapping("")
+    @PatchMapping("change-password")
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     public ResponseEntity<?> changePassword(Principal principal, @RequestBody String password) {
         return ResponseEntity.ok(jdbcUserServices.updatePassword(principal.getName(), passwordEncoder.encode(password)));
