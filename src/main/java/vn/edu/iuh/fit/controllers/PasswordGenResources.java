@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/password")
 public class PasswordGenResources {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping("/gen-password")
+    @GetMapping("/gen")
     public String genPassword(@RequestParam("password") String password) {
         return passwordEncoder.encode(password);
     }
